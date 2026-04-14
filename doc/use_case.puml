@@ -1,35 +1,53 @@
 @startuml
 left to right direction
 
-actor "Дед" as Grandpa
-actor "Баба" as Grandma
-actor "Мышь" as Mouse
-actor "Курочка" as Chicken
+actor "Девочка" as Girl
+actor "Гуси-лебеди" as Geese
+actor "Братец" as Brother
+actor "Печка" as Stove
+actor "Яблоня" as AppleTree
+actor "Речка" as River
 
-package "Управление золотыми активами" {
-  usecase "Бить золотое яйцо" as Hit
-  usecase "Разбить (случайно)" as BreakByTail
-  usecase "Плакать" as Cry
-  usecase "Утешить (Обещать простое)" as Comfort
-  usecase "Снести простое яйцо" as SpawnSimple
+package "Система верификации пути" {
+  usecase "Найти брата" as FindBrother
+  usecase "Спрятаться от погони" as Hide
+  usecase "Выполнить просьбу объекта" as CompleteTask
+  usecase "Получить подсказку" as GetHint
+  usecase "Укрыться в объекте" as TakeShelter
 }
 
-' Дед и Баба бьют яйцо (действие)
-Grandpa --> Hit
-Grandma --> Hit
+' Девочка выполняет действия
+Girl --> FindBrother
+Girl --> Hide
+Girl --> CompleteTask
+Girl --> GetHint
 
-' Мышь разбивает (действие)
-Mouse --> BreakByTail
+' Гуси-лебеди преследуют (влияют)
+Geese --> Hide : <<extend>>
 
-' Дед и Баба ПЛАЧУТ (линии ведут к ним)
-Grandpa --> Cry
-Grandma --> Cry
+' Братец ожидает спасения
+Brother <.. FindBrother : <<include>>
 
-' Курочка УТЕШАЕТ и СНОСИТ (линии к ней)
-Chicken --> Comfort
-Chicken --> SpawnSimple
+' Объекты-помощники (связаны с просьбами)
+Stove --> CompleteTask
+AppleTree --> CompleteTask
+River --> CompleteTask
 
 ' Зависимости внутри системы
-Cry <.. Comfort : <<extend>> : если плачут
-Comfort ..> SpawnSimple : <<include>>
+Hide ..> CompleteTask : <<include>>
+Hide ..> TakeShelter : <<include>>
+GetHint ..> CompleteTask : <<include>>
+FindBrother <.. Hide : <<extend>> : после укрытия
+
+note right of CompleteTask
+  **Верификация пути**
+  Объект проверяет:
+  съеден ли продукт?
+  (яблоко, пирожок, кисель)
+end note
+
+note bottom of Hide
+  Девочка прячется внутри
+  Печки, Яблони или Речки
+end note
 @enduml
