@@ -1,6 +1,6 @@
-# Курочка Ряба
+# Гуси-лебеди
 
-Система «Управление золотыми активами».
+Система "верификации пути".
 
 ## Диаграммы
 
@@ -10,4 +10,4 @@
 | Class | Диаграмма классов (ООП структура) | [doc/class.md](doc/class.md) |
 | Activity | Алгоритм работы системы | [doc/activity.md](doc/activity.md) |
 | Sequence | Пошаговое взаимодействие объектов | [doc/sequence.md](doc/sequence.md) |
-| State | Жизненный цикл Золотого Яйца | [doc/state.md](doc/state.md) |
+| State | Локация девочки (В поле / Скрыта / Поймана) | [doc/state.md](doc/state.md) |
